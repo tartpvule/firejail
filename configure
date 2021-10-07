@@ -711,6 +711,7 @@ ac_subst_files=''
 ac_user_opts='
 enable_option_checking
 enable_analyzer
+enable_asan
 enable_apparmor
 enable_selinux
 enable_dbusproxy
@@ -1368,6 +1369,7 @@ Optional Features:
   --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
   --enable-analyzer       enable GCC static analyzer
+  --enable-asan           enable address sanitizer
   --enable-apparmor       enable apparmor
   --enable-selinux        SELinux labeling support
   --disable-dbusproxy     disable dbus proxy
@@ -3291,6 +3293,18 @@ fi
 if test "x$enable_analyzer" = "xyes"; then :
 
 	EXTRA_CFLAGS="$EXTRA_CFLAGS -fanalyzer -Wno-analyzer-malloc-leak"
+
+fi
+
+# Check whether --enable-asan was given.
+if test "${enable_asan+set}" = set; then :
+  enableval=$enable_asan;
+fi
+
+if test "x$enable_asan" = "xyes"; then :
+
+	EXTRA_CFLAGS="$EXTRA_CFLAGS -fsanitize=address -fno-omit-frame-pointer"
+	EXTRA_LDFLAGS="$EXTRA_LDFLAGS -fsanitize=address"
 
 fi
 
