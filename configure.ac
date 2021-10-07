@@ -48,7 +48,7 @@ AS_IF([test "x$enable_analyzer" = "xyes"], [
 AC_ARG_ENABLE([asan],
     AS_HELP_STRING([--enable-asan], [enable address sanitizer]))
 AS_IF([test "x$enable_asan" = "xyes"], [
-	EXTRA_CFLAGS="$EXTRA_CFLAGS -fsanitize=address"
+	EXTRA_CFLAGS="$EXTRA_CFLAGS -fsanitize=address -fno-omit-frame-pointer"
 	EXTRA_LDFLAGS="$EXTRA_LDFLAGS -fsanitize=address"
 ])
 
