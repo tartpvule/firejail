@@ -45,6 +45,13 @@ AS_IF([test "x$enable_analyzer" = "xyes"], [
 	EXTRA_CFLAGS="$EXTRA_CFLAGS -fanalyzer -Wno-analyzer-malloc-leak"
 ])
 
+AC_ARG_ENABLE([asan],
+    AS_HELP_STRING([--enable-asan], [enable address sanitizer]))
+AS_IF([test "x$enable_asan" = "xyes"], [
+	EXTRA_CFLAGS="$EXTRA_CFLAGS -fsanitize=address"
+	EXTRA_LDFLAGS="$EXTRA_LDFLAGS -fsanitize=address"
+])
+
 HAVE_APPARMOR=""
 AC_ARG_ENABLE([apparmor],
     AS_HELP_STRING([--enable-apparmor], [enable apparmor]))
@@ -63,14 +70,6 @@ AS_IF([test "x$enable_selinux" = "xyes"], [
 	EXTRA_LDFLAGS="$EXTRA_LDFLAGS -lselinux "
 	AC_SUBST(HAVE_SELINUX)
 ])
-
-AC_ARG_ENABLE([asan],
-    AS_HELP_STRING([--enable-asan], [enable address sanitizer]))
-AS_IF([test "x$enable_asan" = "xyes"], [
-	EXTRA_CFLAGS="$EXTRA_CFLAGS -fsanitize=address"
-	EXTRA_LDFLAGS="$EXTRA_LDFLAGS -fsanitize=address"
-])
-
 
 AC_SUBST([EXTRA_CFLAGS])
 AC_SUBST([EXTRA_LDFLAGS])
