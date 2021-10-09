@@ -270,7 +270,7 @@ int checkcfg(int val) {
 				whitelist_reject_topdirs[cnt] = NULL;
 			}
 
-			else
+			else if (!checkcfg2_initialize(ptr))
 				goto errout;
 
 			free(ptr);

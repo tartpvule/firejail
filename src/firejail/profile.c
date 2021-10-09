@@ -595,7 +595,7 @@ int profile_check_line(char *ptr, int lineno, const char *fname) {
 	}
 	else if (strcmp(ptr, "netfilter") == 0) {
 #ifdef HAVE_NETWORK
-		if (checkcfg(CFG_NETWORK))
+		if (checkcfg2_network(CFG2_MAX, NULL))
 			arg_netfilter = 1;
 		else
 			warning_feature_disabled("networking");
@@ -604,7 +604,7 @@ int profile_check_line(char *ptr, int lineno, const char *fname) {
 	}
 	else if (strncmp(ptr, "netfilter ", 10) == 0) {
 #ifdef HAVE_NETWORK
-		if (checkcfg(CFG_NETWORK)) {
+		if (checkcfg2_network(CFG2_MAX, NULL)) {
 			arg_netfilter = 1;
 			arg_netfilter_file = strdup(ptr + 10);
 			if (!arg_netfilter_file)
@@ -618,7 +618,7 @@ int profile_check_line(char *ptr, int lineno, const char *fname) {
 	}
 	else if (strncmp(ptr, "netfilter6 ", 11) == 0) {
 #ifdef HAVE_NETWORK
-		if (checkcfg(CFG_NETWORK)) {
+		if (checkcfg2_network(CFG2_MAX, NULL)) {
 			arg_netfilter6 = 1;
 			arg_netfilter6_file = strdup(ptr + 11);
 			if (!arg_netfilter6_file)
@@ -655,7 +655,7 @@ int profile_check_line(char *ptr, int lineno, const char *fname) {
 	}
 	else if (strncmp(ptr, "net ", 4) == 0) {
 #ifdef HAVE_NETWORK
-		if (checkcfg(CFG_NETWORK)) {
+		if (checkcfg2_network(CFG2_NET, ptr + 4)) {
 			if (strcmp(ptr + 4, "lo") == 0) {
 				fprintf(stderr, "Error: cannot attach to lo device\n");
 				exit(1);
@@ -685,7 +685,7 @@ int profile_check_line(char *ptr, int lineno, const char *fname) {
 
 	else if (strncmp(ptr, "veth-name ", 10) == 0) {
 #ifdef HAVE_NETWORK
-		if (checkcfg(CFG_NETWORK)) {
+		if (checkcfg2_network(CFG2_VETHNAME, ptr + 10)) {
 			Bridge *br = last_bridge_configured();
 			if (br == NULL) {
 				fprintf(stderr, "Error: no network device configured\n");
@@ -708,7 +708,7 @@ int profile_check_line(char *ptr, int lineno, const char *fname) {
 
 	else if (strncmp(ptr, "iprange ", 8) == 0) {
 #ifdef HAVE_NETWORK
-		if (checkcfg(CFG_NETWORK)) {
+		if (checkcfg2_network(CFG2_MAX, NULL)) {
 			Bridge *br = last_bridge_configured();
 			if (br == NULL) {
 				fprintf(stderr, "Error: no network device configured\n");
@@ -750,7 +750,7 @@ int profile_check_line(char *ptr, int lineno, const char *fname) {
 
 	else if (strncmp(ptr, "mac ", 4) == 0) {
 #ifdef HAVE_NETWORK
-		if (checkcfg(CFG_NETWORK)) {
+		if (checkcfg2_network(CFG2_MAX, NULL)) {
 			Bridge *br = last_bridge_configured();
 			if (br == NULL) {
 				fprintf(stderr, "Error: no network device configured\n");
@@ -782,7 +782,7 @@ int profile_check_line(char *ptr, int lineno, const char *fname) {
 
 	else if (strncmp(ptr, "mtu ", 4) == 0) {
 #ifdef HAVE_NETWORK
-		if (checkcfg(CFG_NETWORK)) {
+		if (checkcfg2_network(CFG2_MAX, NULL)) {
 			Bridge *br = last_bridge_configured();
 			if (br == NULL) {
 				fprintf(stderr, "Error: no network device configured\n");
@@ -802,7 +802,7 @@ int profile_check_line(char *ptr, int lineno, const char *fname) {
 
 	else if (strncmp(ptr, "netmask ", 8) == 0) {
 #ifdef HAVE_NETWORK
-		if (checkcfg(CFG_NETWORK)) {
+		if (checkcfg2_network(CFG2_MAX, NULL)) {
 			Bridge *br = last_bridge_configured();
 			if (br == NULL) {
 				fprintf(stderr, "Error: no network device configured\n");
@@ -836,7 +836,7 @@ int profile_check_line(char *ptr, int lineno, const char *fname) {
 	}
 	else if (strncmp(ptr, "ip ", 3) == 0) {
 #ifdef HAVE_NETWORK
-		if (checkcfg(CFG_NETWORK)) {
+		if (checkcfg2_network(CFG2_MAX, NULL)) {
 			Bridge *br = last_bridge_configured();
 			if (br == NULL) {
 				fprintf(stderr, "Error: no network device configured\n");
@@ -868,7 +868,7 @@ int profile_check_line(char *ptr, int lineno, const char *fname) {
 
 	else if (strncmp(ptr, "ip6 ", 4) == 0) {
 #ifdef HAVE_NETWORK
-		if (checkcfg(CFG_NETWORK)) {
+		if (checkcfg2_network(CFG2_MAX, NULL)) {
 			Bridge *br = last_bridge_configured();
 			if (br == NULL) {
 				fprintf(stderr, "Error: no network device configured\n");
@@ -901,7 +901,7 @@ int profile_check_line(char *ptr, int lineno, const char *fname) {
 
 	else if (strncmp(ptr, "defaultgw ", 10) == 0) {
 #ifdef HAVE_NETWORK
-		if (checkcfg(CFG_NETWORK)) {
+		if (checkcfg2_network(CFG2_MAX, NULL)) {
 			if (atoip(ptr + 10, &cfg.defaultgw)) {
 				fprintf(stderr, "Error: invalid IP address\n");
 				exit(1);

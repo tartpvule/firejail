@@ -2371,7 +2371,7 @@ int main(int argc, char **argv, char **envp) {
 		}
 
 		else if (strncmp(argv[i], "--net=", 6) == 0) {
-			if (checkcfg(CFG_NETWORK)) {
+			if (checkcfg2_network(CFG2_NET, argv[i] + 6)) {
 				if (strcmp(argv[i] + 6, "none") == 0) {
 					arg_nonetwork  = 1;
 					cfg.bridge0.configured = 0;
@@ -2411,7 +2411,7 @@ int main(int argc, char **argv, char **envp) {
 		}
 
 		else if (strncmp(argv[i], "--veth-name=", 12) == 0) {
-			if (checkcfg(CFG_NETWORK)) {
+			if (checkcfg2_network(CFG2_VETHNAME, argv[i] + 12)) {
 				Bridge *br = last_bridge_configured();
 				if (br == NULL) {
 					fprintf(stderr, "Error: no network device configured\n");
@@ -2437,7 +2437,7 @@ int main(int argc, char **argv, char **envp) {
 				exit_err_feature("networking");
 		}
 		else if (strncmp(argv[i], "--iprange=", 10) == 0) {
-			if (checkcfg(CFG_NETWORK)) {
+			if (checkcfg2_network(CFG2_MAX, NULL)) {
 				Bridge *br = last_bridge_configured();
 				if (br == NULL) {
 					fprintf(stderr, "Error: no network device configured\n");
@@ -2475,7 +2475,7 @@ int main(int argc, char **argv, char **envp) {
 		}
 
 		else if (strncmp(argv[i], "--mac=", 6) == 0) {
-			if (checkcfg(CFG_NETWORK)) {
+			if (checkcfg2_network(CFG2_MAX, NULL)) {
 				Bridge *br = last_bridge_configured();
 				if (br == NULL) {
 					fprintf(stderr, "Error: no network device configured\n");
@@ -2504,7 +2504,7 @@ int main(int argc, char **argv, char **envp) {
 		}
 
 		else if (strncmp(argv[i], "--mtu=", 6) == 0) {
-			if (checkcfg(CFG_NETWORK)) {
+			if (checkcfg2_network(CFG2_MAX, NULL)) {
 				Bridge *br = last_bridge_configured();
 				if (br == NULL) {
 					fprintf(stderr, "Error: no network device configured\n");
@@ -2521,7 +2521,7 @@ int main(int argc, char **argv, char **envp) {
 		}
 
 		else if (strncmp(argv[i], "--ip=", 5) == 0) {
-			if (checkcfg(CFG_NETWORK)) {
+			if (checkcfg2_network(CFG2_MAX, NULL)) {
 				Bridge *br = last_bridge_configured();
 				if (br == NULL) {
 					fprintf(stderr, "Error: no network device configured\n");
@@ -2550,7 +2550,7 @@ int main(int argc, char **argv, char **envp) {
 		}
 
 		else if (strncmp(argv[i], "--netmask=", 10) == 0) {
-			if (checkcfg(CFG_NETWORK)) {
+			if (checkcfg2_network(CFG2_MAX, NULL)) {
 				Bridge *br = last_bridge_configured();
 				if (br == NULL) {
 					fprintf(stderr, "Error: no network device configured\n");
@@ -2572,7 +2572,7 @@ int main(int argc, char **argv, char **envp) {
 		}
 
 		else if (strncmp(argv[i], "--ip6=", 6) == 0) {
-			if (checkcfg(CFG_NETWORK)) {
+			if (checkcfg2_network(CFG2_MAX, NULL)) {
 				Bridge *br = last_bridge_configured();
 				if (br == NULL) {
 					fprintf(stderr, "Error: no network device configured\n");
@@ -2603,7 +2603,7 @@ int main(int argc, char **argv, char **envp) {
 
 
 		else if (strncmp(argv[i], "--defaultgw=", 12) == 0) {
-			if (checkcfg(CFG_NETWORK)) {
+			if (checkcfg2_network(CFG2_MAX, NULL)) {
 				if (atoip(argv[i] + 12, &cfg.defaultgw)) {
 					fprintf(stderr, "Error: invalid IP address\n");
 					exit(1);
@@ -2641,7 +2641,7 @@ int main(int argc, char **argv, char **envp) {
 
 #ifdef HAVE_NETWORK
 		else if (strcmp(argv[i], "--netfilter") == 0) {
-			if (checkcfg(CFG_NETWORK)) {
+			if (checkcfg2_network(CFG2_MAX, NULL)) {
 				arg_netfilter = 1;
 			}
 			else
@@ -2649,7 +2649,7 @@ int main(int argc, char **argv, char **envp) {
 		}
 
 		else if (strncmp(argv[i], "--netfilter=", 12) == 0) {
-			if (checkcfg(CFG_NETWORK)) {
+			if (checkcfg2_network(CFG2_MAX, NULL)) {
 				arg_netfilter = 1;
 				arg_netfilter_file = argv[i] + 12;
 				check_netfilter_file(arg_netfilter_file);
@@ -2659,7 +2659,7 @@ int main(int argc, char **argv, char **envp) {
 		}
 
 		else if (strncmp(argv[i], "--netfilter6=", 13) == 0) {
-			if (checkcfg(CFG_NETWORK)) {
+			if (checkcfg2_network(CFG2_MAX, NULL)) {
 				arg_netfilter6 = 1;
 				arg_netfilter6_file = argv[i] + 13;
 				check_netfilter_file(arg_netfilter6_file);

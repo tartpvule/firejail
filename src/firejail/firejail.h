@@ -904,4 +904,13 @@ void selinux_relabel_path(const char *path, const char *inside_path);
 // ids.c
 void run_ids(int argc, char **argv);
 
+// checkcfg2.c
+enum {
+	CFG2_NET,
+	CFG2_VETHNAME,
+	CFG2_MAX
+};
+int checkcfg2_initialize(const char *ptr);
+int checkcfg2_network(int cfg, const char *val);
+
 #endif
